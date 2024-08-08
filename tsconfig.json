@@ -1,0 +1,20 @@
+{
+  "extends": "@react-native/typescript-config/tsconfig.json",
+  "strict": true,
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "baseUrl": "src",
+    "typeRoots": ["./types"],
+    "paths": {
+      "@router/*": ["router/*"],
+      // "@router": ["router/index"],
+      // "@screens/*": ["screens/*"],
+      "@screens": ["screens/index"],
+      "@api/*": ["common/api/*"],
+    }
+  }
+}
