@@ -125,7 +125,6 @@ export class HttpService {
   }
 
   private getFullApiUrl(url: string): string {
-    // console.log('url:', `${this.baseUrl}/${url}`)
     return `${this.baseUrl}/${url}`
   }
 
