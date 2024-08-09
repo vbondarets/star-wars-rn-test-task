@@ -3,6 +3,7 @@ import Header from '../../components/header/Header.component'
 import { usePeople } from '../../hooks/people.hook'
 import { FlatList, View } from 'react-native'
 import CharacterComponent from '../../components/character/Character.component'
+import CounterComponent from '../../components/counter/Counter.component'
 
 const HomeScreen = () => {
   const { peoples, handleLoadMore, liked, handleRemoveLike, handleSetLike } =
@@ -10,6 +11,7 @@ const HomeScreen = () => {
   return (
     <SafeAreaView className={`flex-1 items-center flex-col gap-y-5 w-full`}>
       <Header title="Home" />
+      <CounterComponent liked={liked} />
       <FlatList
         className={'w-full px-6'}
         data={peoples}
