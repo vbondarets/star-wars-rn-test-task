@@ -8,6 +8,8 @@ interface IPeopleStore {
   setPage: (value: number) => void
   isNextPage: boolean
   setIsNextPage: (value: boolean) => void
+  liked: Array<{ url: string; gender: string }>
+  setLiked: (value: Array<{ url: string; gender: string }>) => void
 }
 
 export const usePeopleStore = createWithEqualityFn<IPeopleStore>(set => {
@@ -15,6 +17,7 @@ export const usePeopleStore = createWithEqualityFn<IPeopleStore>(set => {
     peoples: [],
     page: 1,
     isNextPage: false,
+    liked: [],
     setPeoples: (value: Array<ICharacter>) => {
       set(state => {
         return {
@@ -33,6 +36,13 @@ export const usePeopleStore = createWithEqualityFn<IPeopleStore>(set => {
       set(() => {
         return {
           isNextPage: value,
+        }
+      })
+    },
+    setLiked: (value: Array<{ url: string; gender: string }>) => {
+      set(() => {
+        return {
+          liked: value,
         }
       })
     },
