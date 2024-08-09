@@ -4,7 +4,7 @@ import Header from '../../components/header/Header.component'
 
 const HomeScreen = () => {
   return (
-    <SafeAreaView className={`flex-1 items-center flex-col px-6 `}>
+    <SafeAreaView className={`flex-1 items-center flex-col px-6 gap-5`}>
       <Header title="Home" />
     </SafeAreaView>
   )
