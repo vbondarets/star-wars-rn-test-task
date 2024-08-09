@@ -1,1 +1,3 @@
-export const QUERY_KEYS = {}
+export const QUERY_KEYS = {
+  PEOPLE: 'PEOPLE',
+}

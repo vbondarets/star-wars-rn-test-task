@@ -1,15 +1,15 @@
-import { ICharacter } from '../../types/character.type'
 import { EnhancedWithAuthHttpService } from '../api/http-auth.service'
 import { HttpFactoryService } from '../api/http-factory.service'
+import { getAllPeopleRes } from './people.api.types'
 
-class ActivityService {
+class PeopleService {
   constructor(private readonly httpService: EnhancedWithAuthHttpService) {
     this.httpService = httpService
   }
 
   private readonly module = 'people'
 
-  public async getAllPeoples(page: number): Promise<ICharacter[]> {
+  public async getAllPeoples(page?: number): Promise<getAllPeopleRes> {
     return this.httpService.get(`${this.module}`, {
       params: {
         page,
@@ -18,6 +18,6 @@ class ActivityService {
   }
 }
 
-export const activityService = new ActivityService(
+export const peopleService = new PeopleService(
   new HttpFactoryService().createAuthHttpService(),
 )
