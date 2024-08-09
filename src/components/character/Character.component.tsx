@@ -23,13 +23,14 @@ const CharacterComponent = ({ character, isLiked, handleLike }: IProps) => {
       </View>
       <TouchableOpacity
         onPress={() => handleLike(character)}
-        className={`w-fit h-fit p-4 ${
-          isLiked && 'border-2 border-solid border-black rounded-full'
+        className={`w-fit p-4 ${
+          isLiked &&
+          'border-2 border-solid border-black rounded-full justify-center items-center'
         }`}
       >
         <LikeIcon
-          width={24}
-          height={24}
+          width={12}
+          height={12}
           stroke={'transparent'}
           fill={'transparent'}
         />
