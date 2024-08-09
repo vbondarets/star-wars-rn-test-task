@@ -8,10 +8,24 @@ import { ICharacter } from '../types/character.type'
 type TUsePeopleReturn = {
   peoples: Array<ICharacter>
   handleLoadMore: () => void
+  handleSetLike: (character: ICharacter) => void
+  handleRemoveLike: (character: ICharacter) => void
+  liked: {
+    url: string
+    gender: string
+  }[]
 }
 export const usePeople = (): TUsePeopleReturn => {
-  const { page, peoples, setPeoples, setIsNextPage, isNextPage, setPage } =
-    usePeopleStore()
+  const {
+    page,
+    peoples,
+    setPeoples,
+    setIsNextPage,
+    isNextPage,
+    setPage,
+    liked,
+    setLiked,
+  } = usePeopleStore()
   useQuery({
     queryKey: [QUERY_KEYS.PEOPLE, page],
     queryFn: () => peopleService.getAllPeoples(page),
@@ -31,8 +45,22 @@ export const usePeople = (): TUsePeopleReturn => {
       setPage(page + 1)
     }
   }
+  const handleSetLike = (character: ICharacter) => {
+    setLiked([...liked, { url: character.url, gender: character.gender }])
+  }
+  const handleRemoveLike = (character: ICharacter) => {
+    setLiked(
+      liked.filter(el => {
+        return el.url !== character.url
+      }),
+    )
+  }
+
   return {
     peoples,
     handleLoadMore,
+    handleSetLike,
+    handleRemoveLike,
+    liked,
   }
 }

@@ -1,1 +1,4 @@
-export enum IconEnum {}
+export enum IconEnum {
+  USER = 'USER',
+  LIKE = 'LIKE',
+}
