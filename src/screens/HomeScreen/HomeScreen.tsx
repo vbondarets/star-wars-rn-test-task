@@ -6,12 +6,19 @@ import CharacterComponent from '../../components/character/Character.component'
 import CounterComponent from '../../components/counter/Counter.component'
 
 const HomeScreen = () => {
-  const { peoples, handleLoadMore, liked, handleRemoveLike, handleSetLike } =
-    usePeople()
+  const {
+    peoples,
+    handleLoadMore,
+    liked,
+    handleRemoveLike,
+    handleSetLike,
+    handleResetLikes,
+  } = usePeople()
   return (
     <SafeAreaView className={`flex-1 items-center flex-col gap-y-5 w-full`}>
       <Header title="Home" />
-      <CounterComponent liked={liked} />
+
+      <CounterComponent liked={liked} resetLikes={handleResetLikes} />
       <FlatList
         className={'w-full px-6'}
         data={peoples}
@@ -27,7 +34,7 @@ const HomeScreen = () => {
         }}
         // eslint-disable-next-line react/no-unstable-nested-components
         ItemSeparatorComponent={() => <View className={'width-full h-3'} />}
-        keyExtractor={el => el.url}
+        keyExtractor={el => el.url + el.created}
         onEndReached={handleLoadMore}
       />
     </SafeAreaView>

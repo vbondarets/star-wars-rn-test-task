@@ -14,6 +14,7 @@ type TUsePeopleReturn = {
     url: string
     gender: string
   }[]
+  handleResetLikes: () => void
 }
 export const usePeople = (): TUsePeopleReturn => {
   const {
@@ -55,6 +56,9 @@ export const usePeople = (): TUsePeopleReturn => {
       }),
     )
   }
+  const handleResetLikes = () => {
+    setLiked([])
+  }
 
   return {
     peoples,
@@ -62,5 +66,6 @@ export const usePeople = (): TUsePeopleReturn => {
     handleSetLike,
     handleRemoveLike,
     liked,
+    handleResetLikes,
   }
 }

@@ -3,4 +3,5 @@ export const text = {
   overallLikes: 'Overall likes: ',
   maleLiked: 'Male liked: ',
   femaleLiked: 'Female liked: ',
+  reset: 'Reset',
 }
