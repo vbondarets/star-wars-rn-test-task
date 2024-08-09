@@ -1,21 +1,30 @@
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Header from '../../components/header/Header.component'
 import { usePeople } from '../../hooks/people.hook'
-import { FlatList, Text, View } from 'react-native'
+import { FlatList, View } from 'react-native'
+import CharacterComponent from '../../components/character/Character.component'
 
 const HomeScreen = () => {
-  const { peoples, handleLoadMore } = usePeople()
+  const { peoples, handleLoadMore, liked, handleRemoveLike, handleSetLike } =
+    usePeople()
   return (
-    <SafeAreaView className={`flex-1 items-center flex-col px-6 gap-5`}>
+    <SafeAreaView className={`flex-1 items-center flex-col gap-y-5 w-full`}>
       <Header title="Home" />
       <FlatList
+        className={'w-full px-6'}
         data={peoples}
-        renderItem={el => <Text>{el.item.name}</Text>}
+        renderItem={el => {
+          const isLiked = Boolean(liked.some(like => like.url === el.item.url))
+          return (
+            <CharacterComponent
+              character={el.item}
+              isLiked={isLiked}
+              handleLike={isLiked ? handleRemoveLike : handleSetLike}
+            />
+          )
+        }}
         // eslint-disable-next-line react/no-unstable-nested-components
-        ItemSeparatorComponent={() => (
-          // eslint-disable-next-line react/self-closing-comp
-          <View className={'width-full h-3 bg-slate-100'}></View>
-        )}
+        ItemSeparatorComponent={() => <View className={'width-full h-3'} />}
         keyExtractor={el => el.url}
         onEndReached={handleLoadMore}
       />
