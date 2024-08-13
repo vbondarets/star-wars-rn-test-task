@@ -7,12 +7,21 @@ interface IProps {
   character: ICharacter
   isLiked?: boolean
   handleLike: (character: ICharacter) => void
+  navigate: () => void
 }
-const CharacterComponent = ({ character, isLiked, handleLike }: IProps) => {
+const CharacterComponent = ({
+  character,
+  isLiked,
+  handleLike,
+  navigate,
+}: IProps) => {
   const UserIcon = getIcon(IconEnum.USER)
   const LikeIcon = getIcon(IconEnum.LIKE)
   return (
-    <View className="w-full h-fit p-4 shadow-sm bg-white rounded-md flex-row justify-between items-center">
+    <TouchableOpacity
+      className="w-full h-fit p-4 shadow-sm bg-white rounded-md flex-row justify-between items-center"
+      onPress={navigate}
+    >
       <View className="p-2 h-10 w-10 bg-slate-400 rounded-full justify-center items-center">
         <UserIcon width={24} height={24} />
       </View>
@@ -35,7 +44,7 @@ const CharacterComponent = ({ character, isLiked, handleLike }: IProps) => {
           fill={'transparent'}
         />
       </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   )
 }
 

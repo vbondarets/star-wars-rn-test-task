@@ -1,5 +1,5 @@
 // import '@i18n'
-import RootRouter from './src/router/rootRouter'
+import RootRouter from './src/router/root.router'
 import { StatusBar } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { SafeAreaProvider } from 'react-native-safe-area-context'

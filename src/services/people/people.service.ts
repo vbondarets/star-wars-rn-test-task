@@ -1,3 +1,4 @@
+import { ICharacter } from 'types/character.type'
 import { EnhancedWithAuthHttpService } from '../api/http-auth.service'
 import { HttpFactoryService } from '../api/http-factory.service'
 import { getAllPeopleRes } from './people.api.types'
@@ -9,12 +10,15 @@ class PeopleService {
 
   private readonly module = 'people'
 
-  public async getAllPeoples(page?: number): Promise<getAllPeopleRes> {
+  public async getAllPeople(page?: number): Promise<getAllPeopleRes> {
     return this.httpService.get(`${this.module}`, {
       params: {
         page,
       },
     })
+  }
+  public async getCharacterById(id: number): Promise<ICharacter> {
+    return this.httpService.get(`${this.module}/${id}`)
   }
 }
 

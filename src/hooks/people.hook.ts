@@ -15,6 +15,8 @@ type TUsePeopleReturn = {
     gender: string
   }[]
   handleResetLikes: () => void
+  handleSetCharacterId: (id: number) => void
+  character?: ICharacter
 }
 export const usePeople = (): TUsePeopleReturn => {
   const {
@@ -26,16 +28,31 @@ export const usePeople = (): TUsePeopleReturn => {
     setPage,
     liked,
     setLiked,
+    characterId,
+    setCharacter,
+    setCharacterId,
+    character,
   } = usePeopleStore()
   useQuery({
     queryKey: [QUERY_KEYS.PEOPLE, page],
-    queryFn: () => peopleService.getAllPeoples(page),
+    queryFn: () => peopleService.getAllPeople(page),
     onError: (error: any) => {
       getError(error)
     },
     onSuccess: data => {
       setPeoples(data.results)
       setIsNextPage(Boolean(data.next))
+    },
+    retry: false,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+  })
+  useQuery({
+    queryKey: [QUERY_KEYS.CHARACTER, characterId],
+    queryFn: () => peopleService.getCharacterById(characterId as number),
+    onError: () => {},
+    onSuccess: data => {
+      setCharacter(data)
     },
     retry: false,
     refetchOnMount: false,
@@ -59,6 +76,9 @@ export const usePeople = (): TUsePeopleReturn => {
   const handleResetLikes = () => {
     setLiked([])
   }
+  const handleSetCharacterId = (id: number) => {
+    setCharacterId(id)
+  }
 
   return {
     peoples,
@@ -67,5 +87,7 @@ export const usePeople = (): TUsePeopleReturn => {
     handleRemoveLike,
     liked,
     handleResetLikes,
+    handleSetCharacterId,
+    character,
   }
 }
