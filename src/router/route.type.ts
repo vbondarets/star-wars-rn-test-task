@@ -3,7 +3,7 @@ import { RouterKeys } from './keys'
 
 export type RootStackParamList = {
   [RouterKeys.HOME]: undefined
-  [RouterKeys.ACTIVITY]: undefined
+  [RouterKeys.CHARACTER]: undefined
 }
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
