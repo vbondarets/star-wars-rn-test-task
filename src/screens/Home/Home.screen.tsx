@@ -4,6 +4,8 @@ import { usePeople } from '../../hooks/people.hook'
 import { FlatList, View } from 'react-native'
 import CharacterComponent from '../../components/character/Character.component'
 import CounterComponent from '../../components/counter/Counter.component'
+import { useNavigation } from '../../hooks/navigation.hook'
+import { text } from '../../text/text'
 
 const HomeScreen = () => {
   const {
@@ -14,10 +16,10 @@ const HomeScreen = () => {
     handleSetLike,
     handleResetLikes,
   } = usePeople()
+  const { goCharacter } = useNavigation()
   return (
     <SafeAreaView className={`flex-1 items-center flex-col gap-y-5 w-full`}>
-      <Header title="Home" />
-
+      <Header title={text.homeCaps} />
       <CounterComponent liked={liked} resetLikes={handleResetLikes} />
       <FlatList
         className={'w-full px-6'}
@@ -29,12 +31,13 @@ const HomeScreen = () => {
               character={el.item}
               isLiked={isLiked}
               handleLike={isLiked ? handleRemoveLike : handleSetLike}
+              navigate={() => goCharacter(el.index + 1)}
             />
           )
         }}
         // eslint-disable-next-line react/no-unstable-nested-components
         ItemSeparatorComponent={() => <View className={'width-full h-3'} />}
-        keyExtractor={el => el.url + el.created}
+        keyExtractor={(el, index) => el.url + el.created + index}
         onEndReached={handleLoadMore}
       />
     </SafeAreaView>
